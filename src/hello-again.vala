@@ -24,12 +24,24 @@ int main(string[] args) {
 	window.title = _("Hello World");
 	window.set_border_width(12);
 	window.set_position(Gtk.WindowPosition.CENTER);
-	window.set_default_size(350, 70);
+	window.set_default_size(1024, 768);
 	window.destroy.connect(Gtk.main_quit);
+	var grid = new Gtk.Grid();
+	grid.orientation = Gtk.Orientation.VERTICAL;
+	grid.row_spacing = 10;
+	var button = new Gtk.Button.with_label ("Click me!");
+	var label = new Gtk.Label (null);
+	/*grid.add (new Gtk.Label (_("Label 1")));
+	grid.add (new Gtk.Label (_("Label 2")));*/
+	grid.add (button);
+	grid.add (label);
 
-	var label = new Gtk.Label(_("Hello Again World"));
-
-	window.add(label);
+	window.add(grid);
+	
+	button.clicked.connect(() =>{
+		label.label = _("Hello World");
+		button.sensitive = false;
+	});
 	window.show_all();
 
 	Gtk.main();
